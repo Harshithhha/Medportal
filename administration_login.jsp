@@ -6,7 +6,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>doctor Login</title>
+        <title>administration Login</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="manifest" href="site.webmanifest">
@@ -37,7 +37,7 @@
                 <div class="preloader-inner position-relative">
                     <div class="preloader-circle"></div>
                     <div class="preloader-img pere-text">
-                        <img src="assets/img/logo/logo2_footer.jpg" height="100px"  alt="">
+                        <img src="assets/img/logo/logo2_footer.png" height="100px"  alt="">
                     </div>
                 </div>
             </div>
@@ -46,20 +46,20 @@
 
 
         <main class="login-body">
-            <!-- Login doctor -->
-            <form class="form-default" name="myform" action="doctor_login.jsp" method="POST">
+            <!-- Login administration -->
+            <form class="form-default" name="myform" action="administration_login.jsp" method="POST">
 
                 <%
-		// if doctor is already logged in to the system, redirect to the dashboard
-		if(session.getAttribute("doctor") != null)
+		// if administration is already logged in to the system, redirect to the dashboard
+		if(session.getAttribute("administration") != null)
 		{
-			response.sendRedirect("doctor_dashboard.jsp");
+			response.sendRedirect("administration_dashboard.jsp");
 		}
 %>
                     <div class="login-form">
                         <!-- logo-login -->
                         <div class="logo-login">
-                            <a href="index.jsp"><img src="assets/img/logo/logo2_footer.jpg" height="100px"  alt=""></a>
+                            <a href="index.jsp"><img src="assets/img/logo/logo2_footer.png" height="100px"  alt=""></a>
                         </div>
                         <h2>Login Here</h2>
                         <div class="form-input">
@@ -74,9 +74,9 @@
 		{
 			out.println(session.getAttribute("Error"));
 		}
-/*		if(session.getAttribute("doctorErrorLogin") != null)
+/*		if(session.getAttribute("administrationErrorLogin") != null)
 		{
-			out.println(session.getAttribute("doctorErrorLogin"));
+			out.println(session.getAttribute("administrationErrorLogin"));
 		}
 		if(session.getAttribute("Rejected") != null)
 		{
@@ -92,11 +92,11 @@
                         <!-- Forgot Password -->
                         <a href="#" class="forget">Forgot Password</a>
                         <!-- Forgot Password -->
-                        <a href="doctor_register.jsp" class="registration"> You dont't have an account? <b> Register here </b> </a>
+                        <a href="administration_register.jsp" class="registration"> You dont't have an account? <b> Register here </b> </a>
                     </div>
 
                     <%
-	// getting all required fields of login of doctor for validation
+	// getting all required fields of login of administration for validation
 	String username = request.getParameter("username");
 	String password = request.getParameter("password");
 
@@ -106,11 +106,11 @@
 		Class.forName("com.mysql.jdbc.Driver");
 
 		// establish the connection
-		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/project" , "root" , "");
+		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/complaint" , "root" , "");
 
 		// create a SQL statement
 		Statement stmt = con.createStatement();
-		String sql = "select * from doctor where username = '" + username + "' and password = SHA1 ('" + password + "')";
+		String sql = "select * from administration where username = '" + username + "' and password = SHA1 ('" + password + "')";
 
 		// execute the SQL statement
 		ResultSet rs = stmt.executeQuery (sql);
@@ -119,24 +119,16 @@
 		if(rs.next())
 		{
 			// if request is not yet accepted by Admin
-			if(rs.getInt("is_approved") == 0)
-			{
-				session.removeAttribute("Error");
-				session.setAttribute("Error","Your Request is not yet accepted by Administrator");
-			}
-			// if request is accepted by Admin
-			else if(rs.getInt("is_approved") == 1)
-			{
-				session.setAttribute("doctor",rs.getString(1));
-				response.sendRedirect("doctor_dashboard.jsp");
-			}
+		session.setAttribute("administration",rs.getString(1));
+				response.sendRedirect("administration_dashboard.jsp");
+			
 		}
 
 		// if details not found in database
 		else
 		{
 			// create a SQL statement
-			String sql1 = "select * from doctor where username = '" + username + "'";
+			String sql1 = "select * from administration where username = '" + username + "'";
 
 			// execute a SQL statement
 			ResultSet rs1 = stmt.executeQuery (sql1);

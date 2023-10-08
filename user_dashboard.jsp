@@ -6,7 +6,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>Medportal</title>
+        <title>ComplainEase</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="manifest" href="site.webmanifest">
@@ -28,14 +28,43 @@
         <link rel="stylesheet" href="assets/css/nice-select.css">
         <link rel="stylesheet" href="assets/css/style.css">
 
+
+        <script>
+
+            function checkDegree() {
+                var select = document.getElementById("degree").value;
+                window.location.replace("user_register.jsp?deg_JS=" + select);
+            }
+
+            window.onload = function() {
+                
+                var dept = sessionStorage.getItem("dept");
+                if (dept !== null) $('#dept').val(dept);
+
+                var address = sessionStorage.getItem("address");
+                if (address !== null) $('#address').val(address);
+
+                var des = sessionStorage.getItem("des");
+                if (des !== null) $('#des').val(des);
+                
+            }
+
+            window.onbeforeunload = function() {
+                sessionStorage.setItem("dept", $('#dept').val());
+                sessionStorage.setItem("address", $('#address').val());
+                sessionStorage.setItem("des", $('#des').val());
+                
+            }
+        </script>
+
     </head>
 
     <body>
 
         <%
-		if(session.getAttribute("doctor") == null)									// check if doctor is already logged in to the system
+		if(session.getAttribute("user") == null)									// check if admin is already patient in to the system
 		{
-			response.sendRedirect("doctor_login.jsp");								// if not logged in, take doctor to login page
+			response.sendRedirect("user_login.jsp");								// if not logged in, take patient to login page
 		}
 %>
 
@@ -45,7 +74,7 @@
                     <div class="preloader-inner position-relative">
                         <div class="preloader-circle"></div>
                         <div class="preloader-img pere-text">
-                            <img src="assets/img/logo/logo2_footer.jpg" height="100px"  alt="">
+                            <img src="assets/img/logo/logo2_footer.png" height="100px"  alt="">
                         </div>
                     </div>
                 </div>
@@ -61,7 +90,7 @@
                                     <!-- Logo -->
                                     <div class="col-xl-2 col-lg-2">
                                         <div class="logo">
-                                            <a href="index.jsp"><img src="assets/img/logo/logo2_footer.jpg" height="100px"  alt=""></a>
+                                            <a href="index.jsp"><img src="assets/img/logo/logo2_footer.png" height="100px"  alt=""></a>
                                         </div>
                                     </div>
                                     <div class="col-xl-10 col-lg-10">
@@ -70,13 +99,10 @@
                                             <div class="main-menu d-none d-lg-block">
                                                 <nav>
                                                     <ul id="navigation">
-                                                        <li class="active"><a href="doctor_dashboard.jsp">Home</a></li>
-                                                        <li><a href="./study-material.html">Cases</a>
-                                                            
-                                                        </li>
-                                                        
-                                                        <!-- Button -->
-                                                        <li class="button-header"><a href="doctor_logout.jsp" class="btn btn3">Log Out</a></li>
+                                                        <li class="active"><a href="user_dashboard.jsp">Home</a></li>
+                                                      
+                                                           <!-- Button -->
+                                                        <li class="button-header"><a href="user_logout.jsp" class="btn btn3">Log Out</a></li>
                                                     </ul>
                                                 </nav>
                                             </div>
@@ -104,10 +130,8 @@
                                     <div class="col-xl-6 col-lg-7 col-md-12">
                                         <div class="hero__caption">
                                             <h1 data-animation="fadeInLeft" data-delay="0.2s">Welcome<br>
-                                                <% out.println(session.getAttribute("doctor")); %>
-                                            </h1>
-                                            <p data-animation="fadeInLeft" data-delay="0.4s"></p>
-                                        </div>
+                                                <% out.println(session.getAttribute("user")); %>
+                                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -115,6 +139,86 @@
                     </div>
                 </section>
             </main>
+            <form action="index.jsp">
+                <div class="login-form reg">
+                    <!-- logo-login -->
+                    <div class="logo-login">
+                        <a href="index.jsp"><img src="assets/img/logo/logo2_footer.png" height="100px"  alt=""></a>
+                    </div>
+                    <h2>Raise your complaint Here!</h2>
+                    <p>*All fields are mandatory</p>
+
+                    <div class="form-input">
+                                    <select name="dept" id="dept" required>
+                        <option value=""> Select department </option>
+                                    <option value="Water">Water </option>
+                                    <option value="Street Lights">Street Lights</option>
+                                    <option value="Electricity">Electricity</option>
+                                    <option value="Drainage">Drainage</option>
+                                    <option value="Garbage">Garbage</option>
+                                    <option value="Others">Others</option>
+
+
+                            <div class="form-input">
+                                <input type="text" name="address" id="address" placeholder="Address"  title="Location" required>
+                            </div>
+            
+                            <div class="form-input">
+                                <input type="des" id="des" name="des" placeholder="Raise complaint"  title="Description" required>
+                            </div>
+                    
+                        <label>Your Image File
+                            <input type="file" name="myImage" accept="image/png, image/gif, image/jpeg" />
+                        </label>
+                            <div class="form-input pt-30">
+                                <input type = "submit" value = "Submit" />
+                            </div>
+                    </div>
+                </div>
+            </form>
+            <%
+            
+                // getting all required fields of registration of user for validation
+                String dept = "Electricity";
+                String address= "Srinagar";
+                String des = "power gone";
+
+                //dept = request.getParameter("dept");
+                address = request.getParameter("address");
+                des = request.getParameter("des");
+                
+                try
+                {
+                    // register the driver
+                    Class.forName("com.mysql.jdbc.Driver");
+            
+                    // establish the connection
+                    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/complaint","root","");
+            
+                    // create a SQL statement
+                    Statement stmt = con.createStatement();
+                    String sql = "insert into problems (Location,des) values('" + address + "','" + des + "')"; 
+            
+                    // execute the SQL statement
+                    stmt.executeUpdate(sql);
+            
+                    // close the connection
+                    stmt.close();
+                    con.close();
+            
+                    // redirects to home page
+                    // response.sendRedirect("index.jsp");
+                }
+                catch(Exception e)
+                {
+                    out.println(e);
+                }
+            %>
+            
+
+            
+
+
             <footer>
                 <div class="footer-wrappper footer-bg">
                     <!-- Footer Start-->
@@ -126,7 +230,7 @@
                                         <div class="single-footer-caption mb-30">
                                             <!-- logo -->
                                             <div class="footer-logo mb-25">
-                                                <a href="index.jsp"><img src="assets/img/logo/logo2_footer.jpg" alt=""></a>
+                                                <a href="index.jsp"><img src="assets/img/logo/logo2_footer.png"  height="100px"alt=""></a>
                                             </div>
                                             <div class="footer-tittle">
                                                 <div class="footer-pera">

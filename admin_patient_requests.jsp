@@ -6,7 +6,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>Medportal</title>
+        <title>ComplainEase</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="manifest" href="site.webmanifest">
@@ -37,7 +37,7 @@
                 <div class="preloader-inner position-relative">
                     <div class="preloader-circle"></div>
                     <div class="preloader-img pere-text">
-                        <img src="assets/img/logo/logo2_footer.jpg" height="100px" alt="">
+                        <img src="assets/img/logo/logo2_footer.png" height="100px" alt="">
                     </div>
                 </div>
             </div>
@@ -53,7 +53,7 @@
                                 <!-- Logo -->
                                 <div class="col-xl-2 col-lg-2">
                                     <div class="logo">
-                                        <a href="index.jsp"><img src="assets/img/logo/logo2_footer.jpg" height="100px"  alt=""></a>
+                                        <a href="index.jsp"><img src="assets/img/logo/logo2_footer.png" height="100px"  alt=""></a>
                                     </div>
                                 </div>
                                 <div class="col-xl-10 col-lg-10">
@@ -63,16 +63,16 @@
                                             <nav>
                                                 <ul id="navigation">
                                                     <li class="active"><a href="admin_dashboard.jsp"> Home </a></li>
-                                                    <li><a href="#">patient</a>
+                                                    <li><a href="#">user</a>
                                                         <ul class="submenu">
                                                             <li><a href="">Manage</a></li>
-                                                            <li><a href="admin_patient_requests.jsp"> Requests </a></li>
+                                                            <li><a href="admin_user_requests.jsp"> Requests </a></li>
                                                         </ul>
                                                     </li>
-                                                    <li><a href="#">doctor</a>
+                                                    <li><a href="#">administration</a>
                                                         <ul class="submenu">
                                                             <li><a href="">Manage</a></li>
-                                                            <li><a href="admin_doctor_requests.jsp"> Requests </a></li>
+                                                            <li><a href="admin_administration_requests.jsp"> Requests </a></li>
                                                         </ul>
                                                     </li>
                                                     <!-- Button -->
@@ -103,8 +103,8 @@
                             <div class="row">
                                 <div class="col-xl-6 col-lg-7 col-md-12">
                                     <div class="hero__caption">
-                                        <h1 data-animation="fadeInLeft" data-delay="0.2s">patient<br>Requests</h1>
-                                        <p data-animation="fadeInLeft" data-delay="0.4s">Accept or Decline patient Registration Requets.</p>
+                                        <h1 data-animation="fadeInLeft" data-delay="0.2s">user<br>Requests</h1>
+                                        <p data-animation="fadeInLeft" data-delay="0.4s">Accept or Decline user Registration Requets.</p>
                                     </div>
                                 </div>
                             </div>
@@ -117,7 +117,7 @@
             <h3 class="mb-30 request">Requests:</h3>
             <div class="progress-table-wrap">
                 <div class="progress-table">
-                    <form class="form-default" action="admin_patient_requests_action.jsp" method="POST">
+                    <form class="form-default" action="admin_user_requests_action.jsp" method="POST">
                         <div class="table-head">
                             <div class="roll_no">ID</div>
                             <div class="name">Name</div>
@@ -132,11 +132,11 @@
 			Class.forName("com.mysql.jdbc.Driver");
 
 			// establish the connection with the database
-			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/project" , "root" , "");
+			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/complaint" , "root" , "");
 
 			// create a SQL statement
 			Statement stmt = con.createStatement();
-			String sql = "select roll_no, name, degree, course, year from patient where is_approved = 0";
+			String sql = "select roll_no, name, degree, course, year from user where is_approved = 0";
 
 			// execute the statement
 			ResultSet rs = stmt.executeQuery (sql);
@@ -207,7 +207,7 @@
                                     <div class="single-footer-caption mb-30">
                                         <!-- logo -->
                                         <div class="footer-logo mb-25">
-                                            <a href="index.jsp"><img src="assets/img/logo/logo2_footer.jpg" alt=""></a>
+                                            <a href="index.jsp"><img src="assets/img/logo/logo2_footer.png" alt=""></a>
                                         </div>
                                         <div class="footer-tittle">
                                             <div class="footer-pera">

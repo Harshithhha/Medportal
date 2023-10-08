@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Medportal</title>
+    <title class="text-dark" >ComplainEase</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="manifest" href="site.webmanifest">
@@ -35,7 +35,7 @@
             <div class="preloader-inner position-relative">
                 <div class="preloader-circle"></div>
                 <div class="preloader-img pere-text">
-                    <img src="assets/img/logo/logo2_footer.jpg" height="100px"  alt="">
+                    <img src="assets/img/logo/logo2_footer.png" height="100px"  alt="">
                 </div>
             </div>
         </div>
@@ -51,7 +51,7 @@
                             <!-- Logo -->
                             <div class="col-xl-2 col-lg-2">
                                 <div class="logo">
-                                    <a href="index.jsp"><img src="assets/img/logo/logo2_footer.jpg" height="100px"></a>
+                                    <a href="index.jsp"><img src="assets/img/logo/logo2_footer.png" height="100px"></a>
                                 </div>
                             </div>
                             <div class="col-xl-10 col-lg-10">
@@ -62,15 +62,15 @@
                                             <ul id="navigation">
                                                 <li><a href="#">Login</a>
                                                     <ul class="submenu">
-                                                        <li><a href="patient_login.jsp">patient</a></li>
-                                                        <li><a href="doctor_login.jsp">doctor</a></li>
-                                                        <li><a href="admin_login.jsp">Admin</a></li>
+                                                        <li><a href="user_login.jsp">user</a></li>
+                                                        <li><a href="administration_login.jsp">administration</a></li>
+                                                      
                                                     </ul>
                                                 </li>
                                                 <li><a href="#">Register</a>
                                                     <ul class="submenu">
-                                                        <li><a href="patient_register.jsp">patient</a></li>
-                                                        <li><a href="doctor_register.jsp">doctor</a></li>
+                                                        <li><a href="user_register.jsp">user</a></li>
+                                                        <li><a href="administration_register.jsp">administration</a></li>
                                                     </ul>
                                                 </li>
                                             </ul>
@@ -99,7 +99,7 @@
                         <div class="row">
                             <div class="col-xl-6 col-lg-7 col-md-12">
                                 <div class="hero__caption">
-                                    <h1 data-animation="fadeInLeft" data-delay="0.2s"><br>Medportal</h1>
+                                    <h1 data-animation="fadeInLeft" data-delay="0.2s"><br>ComplainEase</h1>
                                     <p style="font: size 100px;"  data-animation="fadeInLeft" data-delay="0.4s"><br>Your journey to better health continues</p>
                                 </div>
                             </div>
@@ -120,7 +120,7 @@
                                 <div class="single-footer-caption mb-30">
                                     <!-- logo -->
                                     <div class="footer-logo mb-25">
-                                        <a href="index.jsp"><img src="assets/img/logo/logo2_footer.jpg" alt=""></a>
+                                        <a href="index.jsp"><img src="assets/img/logo/logo2_footer.png" alt=""></a>
                                     </div>
                                     <div class="footer-tittle">
                                         <div class="footer-pera">

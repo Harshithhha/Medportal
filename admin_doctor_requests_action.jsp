@@ -10,7 +10,7 @@
 		Class.forName("com.mysql.jdbc.Driver");
 
 		// establish the connection with the database
-		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/project" , "root" , "");
+		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/complaint" , "root" , "");
 
 		// create a SQL statement
 		Statement stmt = con.createStatement();
@@ -20,7 +20,7 @@
 		{
 			for(String s:c)
 			{
-				String qy = "delete from doctor where subject ='" + s + "'";
+				String qy = "delete from administration where subject ='" + s + "'";
 				stmt.executeUpdate(qy);
 			}
 		}
@@ -29,7 +29,7 @@
 		{
 			for(String s:c)
 			{
-				String qy = "update doctor set is_approved = 1 where subject ='" + s + "'";
+				String qy = "update administration set is_approved = 1 where subject ='" + s + "'";
 				stmt.executeUpdate(qy);
 			}
 		}
@@ -38,5 +38,5 @@
 	{
 		out.println(e.getMessage());
 	}
-	response.sendRedirect("admin_doctor_requests.jsp");				// redirect to requsts' page
+	response.sendRedirect("admin_administration_requests.jsp");				// redirect to requsts' page
 %>

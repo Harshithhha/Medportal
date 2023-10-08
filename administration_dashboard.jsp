@@ -6,7 +6,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>Medportal</title>
+        <title>ComplainEase</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="manifest" href="site.webmanifest">
@@ -33,9 +33,9 @@
     <body>
 
         <%
-		if(session.getAttribute("patient") == null)									// check if admin is already patient in to the system
+		if(session.getAttribute("administration") == null)									// check if administration is already logged in to the system
 		{
-			response.sendRedirect("patient_login.jsp");								// if not logged in, take patient to login page
+			response.sendRedirect("administration_login.jsp");								// if not logged in, take administration to login page
 		}
 %>
 
@@ -45,7 +45,7 @@
                     <div class="preloader-inner position-relative">
                         <div class="preloader-circle"></div>
                         <div class="preloader-img pere-text">
-                            <img src="assets/img/logo/logo2_footer.jpg" height="100px"  alt="">
+                            <img src="assets/img/logo/logo2_footer.png" height="100px"  alt="">
                         </div>
                     </div>
                 </div>
@@ -61,7 +61,7 @@
                                     <!-- Logo -->
                                     <div class="col-xl-2 col-lg-2">
                                         <div class="logo">
-                                            <a href="index.jsp"><img src="assets/img/logo/logo2_footer.jpg" height="100px"  alt=""></a>
+                                            <a href="index.jsp"><img src="assets/img/logo/logo2_footer.png" height="100px"  alt=""></a>
                                         </div>
                                     </div>
                                     <div class="col-xl-10 col-lg-10">
@@ -70,17 +70,13 @@
                                             <div class="main-menu d-none d-lg-block">
                                                 <nav>
                                                     <ul id="navigation">
-                                                        <li class="active"><a href="patient_dashboard.jsp">Home</a></li>
-                                                        <li><a href="#">Services provided </a>
-                                                            <ul class="submenu">
-                                                                <li><a href="">Neuro</a></li>
-                                                                <li><a href="">Cardio</a></li>
-                                                                <li><a herf="">Gyno</a></li>
-                                                            </ul>
+                                                        <li class="active"><a href="administration_dashboard.jsp">Home</a></li>
+                                                        <li><a href="./study-material.html">Cases</a>
+                                                            
                                                         </li>
-                                                        <li><a href="./qna.html">Q/A Forum</a></li>
+                                                        
                                                         <!-- Button -->
-                                                        <li class="button-header"><a href="patient_logout.jsp" class="btn btn3">Log Out</a></li>
+                                                        <li class="button-header"><a href="administration_logout.jsp" class="btn btn3">Log Out</a></li>
                                                     </ul>
                                                 </nav>
                                             </div>
@@ -108,11 +104,9 @@
                                     <div class="col-xl-6 col-lg-7 col-md-12">
                                         <div class="hero__caption">
                                             <h1 data-animation="fadeInLeft" data-delay="0.2s">Welcome<br>
-                                                <% out.println(session.getAttribute("patient")); %>
-                                                <p data-animation="fadeInLeft" data-delay="0.2s"> Your journey to better health continues</p>
-
+                                                <% out.println(session.getAttribute("administration")); %>
                                             </h1>
-                                        <p data-animation="fadeInLeft" data-delay="0.4s"> One-stop shop for all things healthcare. From appointment scheduling to prescription refills, we've got you covered."</p>
+                                            <p data-animation="fadeInLeft" data-delay="0.4s"></p>
                                         </div>
                                     </div>
                                 </div>
@@ -132,7 +126,7 @@
                                         <div class="single-footer-caption mb-30">
                                             <!-- logo -->
                                             <div class="footer-logo mb-25">
-                                                <a href="index.jsp"><img src="assets/img/logo/logo2_footer.jpg" alt=""></a>
+                                                <a href="index.jsp"><img src="assets/img/logo/logo2_footer.png" height="100px" alt=""></a>
                                             </div>
                                             <div class="footer-tittle">
                                                 <div class="footer-pera">

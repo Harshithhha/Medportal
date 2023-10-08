@@ -45,7 +45,7 @@
                     <div class="preloader-inner position-relative">
                         <div class="preloader-circle"></div>
                         <div class="preloader-img pere-text">
-                            <img src="assets/img/logo/logo2_footer.jpg" height="100px" alt="">
+                            <img src="assets/img/logo/logo2_footer.png" height="100px" alt="">
                         </div>
                     </div>
                 </div>
@@ -61,7 +61,7 @@
                                     <!-- Logo -->
                                     <div class="col-xl-2 col-lg-2">
                                         <div class="logo">
-                                            <a href="index.jsp"> <img src="assets/img/logo/logo2_footer.jpg" height="100px" alt=""></a>
+                                            <a href="index.jsp"> <img src="assets/img/logo/logo2_footer.png" height="100px" alt=""></a>
                                         </div>
                                     </div>
                                     <div class="col-xl-10 col-lg-10">
@@ -71,16 +71,16 @@
                                                 <nav>
                                                     <ul id="navigation">
                                                         <li class="active"> <a href="admin_dashboard.jsp"> Home </a></li>
-                                                        <li> <a href="#">patient</a>
+                                                        <li> <a href="#">user</a>
                                                             <ul class="submenu">
                                                                 <li> <a href="">Manage</a></li>
-                                                                <li> <a href="admin_patient_requests.jsp">Requests</a></li>
+                                                                <li> <a href="admin_user_requests.jsp">Requests</a></li>
                                                             </ul>
                                                         </li>
-                                                        <li> <a href="#">doctor</a>
+                                                        <li> <a href="#">administration</a>
                                                             <ul class="submenu">
                                                                 <li> <a href=""> Manage </a> </li>
-                                                                <li> <a href="admin_doctor_requests.jsp"> Requests </a></li>
+                                                                <li> <a href="admin_administration_requests.jsp"> Requests </a></li>
                                                             </ul>
                                                         </li>
                                                         <!-- Button -->
@@ -132,7 +132,7 @@
                                         <div class="single-footer-caption mb-30">
                                             <!-- logo -->
                                             <div class="footer-logo mb-25">
-                                                <a href="index.jsp"> <img src="assets/img/logo/logo2_footer.jpg" alt=""> </a>
+                                                <a href="index.jsp"> <img src="assets/img/logo/logo2_footer.png" alt=""> </a>
                                             </div>
                                             <div class="footer-tittle">
                                                 <div class="footer-pera">

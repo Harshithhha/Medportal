@@ -37,7 +37,7 @@
                 <div class="preloader-inner position-relative">
                     <div class="preloader-circle"></div>
                     <div class="preloader-img pere-text">
-                        <img src="assets/img/logo/logo2_footer.jpg" height="100px">
+                        <img src="assets/img/logo/logo2_footer.png" height="100px">
                     </div>
                 </div>
             </div>
@@ -59,7 +59,7 @@
                     <div class="login-form">
                         <!-- logo-login -->
                         <div class="logo-login">
-                            <a href="index.jsp"> <img src="assets/img/logo/logo2_footer.jpg" height="100px"></a>
+                            <a href="index.jsp"> <img src="assets/img/logo/logo2_footer.png" height="100px"></a>
                         </div>
                         <h2>Login Here</h2>
                         <div class="form-input">
@@ -88,7 +88,7 @@
 			Class.forName("com.mysql.jdbc.Driver");
 
 			// establish the connection with the database
-			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/project" , "root" , "");
+			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/complaint" , "root" , "");
 
 			// create a SQL statement
 			Statement stmt = con.createStatement();

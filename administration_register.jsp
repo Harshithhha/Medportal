@@ -6,7 +6,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title>Patient Registration</title>
+        <title>administration Registration</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="manifest" href="site.webmanifest">
@@ -32,43 +32,16 @@
             var check = function() {
                 if (document.getElementById("password").value == document.getElementById("confirm_password").value) {
                     document.getElementById("message").style.color = "green";
-                    document.getElementById("message").innerHTML = "Password matched!";
+                    document.getElementById("message").innerHTML = "Password matching";
                 } else {
                     document.getElementById("message").style.color = "red";
-                    document.getElementById("message").innerHTML = "Password does not match!";
+                    document.getElementById("message").innerHTML = "Password not matching";
                 }
             }
 
             function checkDegree() {
-                var select = document.getElementById("degree").value;
-                window.location.replace("patient_register.jsp?deg_JS=" + select);
-            }
-
-            window.onload = function() {
-                if (sessionStorage.getItem('roll_no') == 'roll_no') {
-                    return;
-                }
-                var roll_no = sessionStorage.getItem("roll_no");
-                if (roll_no !== null) $('#roll_no').val(roll_no);
-                var name = sessionStorage.getItem("name");
-                if (name !== null) $('#name').val(name);
-                var email = sessionStorage.getItem("email");
-                if (email !== null) $('#email').val(email);
-                var password = sessionStorage.getItem("password");
-                if (password !== null) $('#password').val(password);
-                var confirm_password = sessionStorage.getItem("confirm_password");
-                if (confirm_password !== null) $('#confirm_password').val(confirm_password);
-                var degree = sessionStorage.getItem("degree");
-                if (degree !== null) $('#degree').val(degree);
-            }
-
-            window.onbeforeunload = function() {
-                sessionStorage.setItem("roll_no", $('#roll_no').val());
-                sessionStorage.setItem("name", $('#name').val());
-                sessionStorage.setItem("email", $('#email').val());
-                sessionStorage.setItem("password", $('#password').val());
-                sessionStorage.setItem("confirm_password", $('#confirm_password').val());
-                sessionStorage.setItem("degree", $('#degree').val());
+                var select = document.getElementById("degree");
+                var option = select.options[select.selectedIndex];
             }
         </script>
     </head>
@@ -80,7 +53,7 @@
                 <div class="preloader-inner position-relative">
                     <div class="preloader-circle"></div>
                     <div class="preloader-img pere-text">
-                        <img src="assets/img/logo/logo2_footer.jpg" height="100px"  alt="">
+                        <img src="assets/img/logo/logo2_footer.png" height="100px"  alt="">
                     </div>
                 </div>
             </div>
@@ -92,24 +65,24 @@
 
         <main class="login-body">
             <!-- Login Admin -->
-            <form class="form-default" name="myform" action="patient_register.jsp" method="POST">
+            <form class="form-default" name="myform" action="administration_register.jsp" method="POST">
 
                 <div class="login-form reg">
                     <!-- logo-login -->
                     <div class="logo-login">
-                        <a href="index.jsp"><img src="assets/img/logo/logo2_footer.jpg" height="100px"  alt=""></a>
+                        <a href="index.jsp"><img src="assets/img/logo/logo2_footer.png" height="100px"  alt=""></a>
                     </div>
                     <h2>Register Here</h2>
                     <p>*All fields are mandatory</p>
 
                     <div class="form-input">
-                        <input type="text" name="roll_no" id="roll_no" placeholder="Patient ID"  title="Enter valid roll number" required>
+                        <input type="text" name="name" placeholder="Full name"  title="Enter First Name and Last Name" required>
                     </div>
                     <div class="form-input">
-                        <input type="text" name="name" id="name" placeholder="Full name"  title="Enter First Name and Last Name" required>
+                        <input type="text" name="username" placeholder="Username" title="Enter First Username" required>
                     </div>
                     <div class="form-input">
-                        <input name="email" id="email" placeholder="Email ID"  title="Must be like : characters@characters.domain" required>
+                        <input name="email" placeholder="Email ID" title="Must be like : characters@characters.domain" required>
                     </div>
                     <div class="form-input">
                         <input type="password" id="password" name="password" placeholder="Password"  title="Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters" required>
@@ -118,57 +91,70 @@
                         <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm Password" onkeyup="check();" required>
                         <span id="message"></span>
                     </div>
+                    
 
-                    <%
-	try
-	{
-		// register the driver
-		Class.forName("com.mysql.jdbc.Driver");
+                        <div class="form-input">
+                            <select name="degree" id="degree" required>
+							<option value=""> Select degree </option>
+                            <option value="MBBS">MBBS </option>
+                            <option value="MD">MD </option>
+                            <option value="MS">MS </option>
+					
 
-		// establish the connection
-		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/project","root","");
+						</select>
+                        </div>
+                        
+                            <div class="form-input">
+                                <select name="course" required>
+							<option value=""> Select course </option>
+                            <option value="MBBS">MBBS </option>
+                            <option value="ortho">MD ortho </option>
+                            <option value="cardio">MD cardio </option>
+                            <option value="neuro">MD neuro </option>
+                            <option value="gyno">MD gyno </option>
+                            
 
-		// create a SQL statement
-		Statement stmt = con.createStatement();
-
-		// execute the SQL statement
-		ResultSet rs = stmt.executeQuery("select degree from enroll_for group by degree");
-%>
-                       
-                        <%
-	}	
-	catch(Exception e)
-	{
-		out.println(e);
-	}
-%>
-                            <div class="form-input pt-30">
-                                <input type="submit" name="submit" value="Send Request">
+						</select>
                             </div>
-                            <!-- Forget Password -->
-                            <a href="patient_login.jsp" class="registration">Already have an account?<b> Login here </b> </a>
+                            <div class="form-input">
+                                <select name="year" required>
+							<option value=""> Select year </option>
+							<option value="1"> 1 </option>
+							<option value="2"> 2 </option>
+
+						</select>
+                            </div>
+                            
+                            
+                                <div class="form-input pt-30">
+                                    <input type="submit" name="submit" value="Send Request">
+                                </div>
+                                <!-- Forget Password -->
+                                <a href="administration_login.jsp" class="registration">Already have an account?<b> Login here </b> </a>
                 </div>
 
                 <%
-	// getting all required fields of registration of patient for validation
-	String no = request.getParameter("roll_no");
+	// getting all required fields of registration of user for validation
 	String name = request.getParameter("name");
+	String username = request.getParameter("username");
 	String email = request.getParameter("email");
 	String password = request.getParameter("password");
-	String degree = "btech";
-	String course = "btech";
-	String year = "2";
+	String degree = request.getParameter("degree");
+	String course = request.getParameter("course");
+	String year = request.getParameter("year");
+    String subject = request.getParameter("name");                 
+
 	try
 	{
 		// register the driver
 		Class.forName("com.mysql.jdbc.Driver");
 
 		// establish the connection
-		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/project","root","");
+		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/complaint","root","");
 
 		// create a SQL statement
 		Statement stmt = con.createStatement();
-		String sql = "insert into patient (roll_no, name, email_id, password, degree, course, year) values('" + no + "','" + name + "','" + email + "',SHA1('" + password + "'),'" + degree + "','" + course + "','" + year + "')"; 
+		String sql = "insert into administration (name, username, email_id, password, degree, course, year, subject) values('" + name + "','" + username + "','" + email + "',SHA1('" + password + "'),'" + degree + "','" + course + "','" + year + "','" + subject + "')"; 
 
 		// execute the SQL statement
 		stmt.executeUpdate(sql);
@@ -182,12 +168,13 @@
 	}
 	catch(Exception e)
 	{
-		out.println(e);
+		out.println(e+"letter");
 	}
 %>
             </form>
             <!-- /end login form -->
         </main>
+
 
         <script src="./assets/js/vendor/modernizr-3.5.0.min.js"></script>
         <!-- Jquery, Popper, Bootstrap -->
