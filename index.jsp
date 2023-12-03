@@ -120,7 +120,7 @@
                                 <div class="single-footer-caption mb-30">
                                     <!-- logo -->
                                     <div class="footer-logo mb-25">
-                                        <a href="index.jsp"><img src="assets/img/logo/logo2_footer.png" alt=""></a>
+                                        <a href="index.jsp"><img src="assets/img/logo/logo2_footer.png" alt="" height="120px"></a>
                                     </div>
                                     <div class="footer-tittle">
                                         <div class="footer-pera">

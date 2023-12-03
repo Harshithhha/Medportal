@@ -48,14 +48,14 @@
         <main class="login-body">
             <!-- Login administration -->
             <form class="form-default" name="myform" action="administration_login.jsp" method="POST">
-
+<!-- 
                 <%
 		// if administration is already logged in to the system, redirect to the dashboard
 		if(session.getAttribute("administration") != null)
 		{
 			response.sendRedirect("administration_dashboard.jsp");
 		}
-%>
+%> -->
                     <div class="login-form">
                         <!-- logo-login -->
                         <div class="logo-login">
@@ -96,11 +96,14 @@
                     </div>
 
                     <%
+                    
 	// getting all required fields of login of administration for validation
 	String username = request.getParameter("username");
 	String password = request.getParameter("password");
-
-	try
+    String submit = request.getParameter("submit");
+    if(submit != null)
+    {
+        try
 	{
 		// register the driver
 		Class.forName("com.mysql.jdbc.Driver");
@@ -154,6 +157,9 @@
 	{
 		out.println(e);
 	}
+    }
+
+	
 %>
             </form>
             <!-- /end login form -->

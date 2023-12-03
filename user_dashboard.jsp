@@ -139,7 +139,7 @@
                     </div>
                 </section>
             </main>
-            <form action="index.jsp">
+            <form action="" method="post" enctype="multipart/form-data">
                 <div class="login-form reg">
                     <!-- logo-login -->
                     <div class="logo-login">
@@ -168,7 +168,7 @@
                             </div>
                     
                         <label>Your Image File
-                            <input type="file" name="myImage" accept="image/png, image/gif, image/jpeg" />
+                            <input type="file" name="image" accept="image/*" required>
                         </label>
                             <div class="form-input pt-30">
                                 <input type = "submit" value = "Submit" />
@@ -176,44 +176,83 @@
                     </div>
                 </div>
             </form>
-            <%
-            
-                // getting all required fields of registration of user for validation
-                String dept = "Electricity";
-                String address= "Srinagar";
-                String des = "power gone";
+            <%@ page import="java.sql.*" %>
+<%@ page import="org.apache.commons.fileupload.FileItem" %>
+<%@ page import="org.apache.commons.fileupload.disk.DiskFileItemFactory" %>
+<%@ page import="org.apache.commons.fileupload.servlet.ServletFileUpload" %>
+<%@ page import="org.apache.commons.io.IOUtils" %>
+<%@ page import="java.util.List" %>
 
-                //dept = request.getParameter("dept");
-                address = request.getParameter("address");
-                des = request.getParameter("des");
-                
-                try
-                {
-                    // register the driver
-                    Class.forName("com.mysql.jdbc.Driver");
-            
-                    // establish the connection
-                    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/complaint","root","");
-            
-                    // create a SQL statement
-                    Statement stmt = con.createStatement();
-                    String sql = "insert into problems (Location,des) values('" + address + "','" + des + "')"; 
-            
-                    // execute the SQL statement
-                    stmt.executeUpdate(sql);
-            
-                    // close the connection
-                    stmt.close();
-                    con.close();
-            
-                    // redirects to home page
-                    // response.sendRedirect("index.jsp");
+
+<%
+
+
+    Connection connection = null;
+    PreparedStatement preparedStatement = null;
+
+    try {
+        Class.forName("com.mysql.jdbc.Driver");
+        
+        connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/complaint","root","");
+
+        if (ServletFileUpload.isMultipartContent(request)) {
+            DiskFileItemFactory factory = new DiskFileItemFactory();
+            ServletFileUpload upload = new ServletFileUpload(factory);
+
+            try {
+                List<FileItem> items = upload.parseRequest(request);
+                String dept = null;
+                String address = null;
+                String des = null;
+                byte[] image = null;
+
+                for (FileItem item : items) {
+                    if (item.isFormField()) {
+                        if ("address".equals(item.getFieldName())) {
+                            address = item.getString("UTF-8");
+                        } else if ("des".equals(item.getFieldName())) {
+                            des = item.getString("UTF-8");
+                        }
+                        else if ("dept".equals(item.getFieldName())) {
+                            dept = item.getString("UTF-8");
+                        }
+                    } else {
+                        image = item.get();
+                    }
                 }
-                catch(Exception e)
-                {
-                    out.println(e);
-                }
-            %>
+
+                // Insert data into MySQL
+                String sql = "INSERT INTO problems (dept, Location,des, image) VALUES (?,?, ?, ?)";
+                preparedStatement = connection.prepareStatement(sql);
+                preparedStatement.setString(1, dept);
+                preparedStatement.setString(2, address);
+                preparedStatement.setString(3, des);
+                preparedStatement.setBytes(4, image);
+                preparedStatement.executeUpdate();
+
+                out.println("<p>Data inserted successfully!</p>");
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+    } finally {
+        // Close resources
+        try {
+            if (preparedStatement != null) {
+                preparedStatement.close();
+            }
+            if (connection != null) {
+                connection.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+%>
+           
             
 
             

@@ -98,7 +98,7 @@
                 <section class="slider-area ">
                     <div class="slider-active">
                         <!-- Single Slider -->
-                        <div class="single-slider slider-height d-flex align-items-center">
+                        <div class="single-slider slider-height d-flex align-items-center" width="1000px">
                             <div class="container">
                                 <div class="row">
                                     <div class="col-xl-6 col-lg-7 col-md-12">
@@ -106,58 +106,89 @@
                                             <h1 data-animation="fadeInLeft" data-delay="0.2s">Welcome<br>
                                                 <% out.println(session.getAttribute("administration")); %>
                                             </h1>
-                                            <p data-animation="fadeInLeft" data-delay="0.4s"></p>
-                                        </div>
-                                    </div>
+                                              
+                      
+              
+            </main>
+            <div class="section-top-border" width="10000px">
+                <h3 class="mb-30 request">Requests:</h3>
+                
+                    <div class="progress-table" width="5000px">
+                        <form class="form-default" action="" method="POST">
+                            <div class="table-head">
+                                <div class="roll_no">Description</div>
+                                <div class="name">Address</div>
+    
+                                <div class="accept">Proof</div>
+                            </div>
+                                       
+                                        <%@ page import="java.sql.*" %>
+                                        <%@ page import="java.io.*" %>
+                                       
+                                        <%@ page import="java.util.Base64" %>
+
+                                        <%
+                                            String url = "jdbc:mysql://your_mysql_server:3306/your_database";
+                                            String user = "your_username";
+                                            String password = "your_password";
+
+                                            try {
+                                                Class.forName("com.mysql.jdbc.Driver");
+                                                
+                                                Connection  connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/complaint","root","");
+                                                Statement statement = connection.createStatement();
+                                                ResultSet resultSet = statement.executeQuery("SELECT * FROM problems");
+
+                                                while (resultSet.next()) {
+                                                    String dept = resultSet.getString("dept");
+                                                    String address = resultSet.getString("Location");
+                                                    String des = resultSet.getString("des");
+                                                    Blob blob = resultSet.getBlob("image");
+                                                    byte[] imageData = blob.getBytes(1, (int) blob.length());
+                                                    String base64Image = Base64.getEncoder().encodeToString(imageData);
+
+                                        %>
+                                                    <div class="ml-500">
+                                                        <div class="table-row">
+                                                            
+                                                            <div class="roll_no"> <%= address %> </div>
+                                                            <div class="roll_no"> <%= des %></p></div>
+                                                        <img src="data:image/jpeg;base64,<%= base64Image %>" alt="Image" width="120px"/>
+                                                        <div class="accept"><input type="checkbox" name="ad" value="<%= resultSet.getInt(1)%>"></div>
+                                                    </div>
+                                        <%
+                                                }
+
+                                                connection.close();
+                                            } catch (ClassNotFoundException | SQLException e) {
+                                                e.printStackTrace();
+                                            }
+                                        %>
+                                      
+                        </form>
+                       
+                    </div>
+            
+            </div>
+            </div>
+            </div>
+       
+
+                  </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </section>
-            </main>
-            <footer>
-                <div class="footer-wrappper footer-bg">
-                    <!-- Footer Start-->
-                    <div class="footer-area footer-padding">
-                        <div class="container">
-                            <div class="row justify-content-between">
-                                <div class="col-xl-4 col-lg-5 col-md-4 col-sm-6">
-                                    <div class="single-footer-caption mb-50">
-                                        <div class="single-footer-caption mb-30">
-                                            <!-- logo -->
-                                            <div class="footer-logo mb-25">
-                                                <a href="index.jsp"><img src="assets/img/logo/logo2_footer.png" height="100px" alt=""></a>
-                                            </div>
-                                            <div class="footer-tittle">
-                                                <div class="footer-pera">
-                                                    <p>The automated process starts here.</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- footer-bottom area -->
-                                <div class="footer-bottom-area">
-                                    <div class="container">
-                                        <div class="footer-border">
-                                            <div class="row d-flex align-items-center">
-                                                <div class="col-xl-12 ">
-                                                    <div class="footer-copy-right text-center">
-                                                        <p>
-                                                            Copyright &copy;
-                                                            <script>
-                                                                document.write(new Date().getFullYear());
-                                                            </script> All rights reserved
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Footer End-->
-                            </div>
-            </footer>
+                </div>
+            </section>
+            <div class="form-input pt-30 request">
+                <input class="genric-btn primary-border" type="submit" name="accept" value="Accept Request">
+            </div>
+            <div class="form-input pt-30 request">
+                <input class="genric-btn primary-border" type="submit" name="reject" value="Delete Requests">
+            </div>
+  
+            
             <!-- Scroll Up -->
             <div id="back-top">
                 <a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>

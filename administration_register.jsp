@@ -94,17 +94,20 @@
                     
 
                         <div class="form-input">
-                            <select name="degree" id="degree" required>
+                            <select name="dept" id="dept" required>
 							<option value=""> Select degree </option>
-                            <option value="MBBS">MBBS </option>
-                            <option value="MD">MD </option>
-                            <option value="MS">MS </option>
+                            <option value="Water">Water </option>
+                            <option value="Drainage">Drainage </option>
+                            <option value="Road">Road</option>
+                            <option value="Electricity">Electricity </option>
+                            <option value="Garbage">Garbage </option>
+                            <option value="Street Lights">Street Lights</option>
 					
 
 						</select>
                         </div>
                         
-                            <div class="form-input">
+                            <!-- <div class="form-input">
                                 <select name="course" required>
 							<option value=""> Select course </option>
                             <option value="MBBS">MBBS </option>
@@ -115,15 +118,15 @@
                             
 
 						</select>
-                            </div>
-                            <div class="form-input">
+                            </div> -->
+                            <!-- <div class="form-input">
                                 <select name="year" required>
 							<option value=""> Select year </option>
 							<option value="1"> 1 </option>
 							<option value="2"> 2 </option>
 
 						</select>
-                            </div>
+                            </div> -->
                             
                             
                                 <div class="form-input pt-30">
@@ -139,10 +142,10 @@
 	String username = request.getParameter("username");
 	String email = request.getParameter("email");
 	String password = request.getParameter("password");
-	String degree = request.getParameter("degree");
-	String course = request.getParameter("course");
-	String year = request.getParameter("year");
-    String subject = request.getParameter("name");                 
+	String dept = request.getParameter("dept"); 
+    String submit = request.getParameter("submit");
+    if(submit != null)
+    {               
 
 	try
 	{
@@ -154,7 +157,7 @@
 
 		// create a SQL statement
 		Statement stmt = con.createStatement();
-		String sql = "insert into administration (name, username, email_id, password, degree, course, year, subject) values('" + name + "','" + username + "','" + email + "',SHA1('" + password + "'),'" + degree + "','" + course + "','" + year + "','" + subject + "')"; 
+		String sql = "insert into administration (name, username, email_id, password, dept) values('" + name + "','" + username + "','" + email + "',SHA1('" + password + "'),'" + dept + "')"; 
 
 		// execute the SQL statement
 		stmt.executeUpdate(sql);
@@ -170,6 +173,7 @@
 	{
 		out.println(e+"letter");
 	}
+}
 %>
             </form>
             <!-- /end login form -->
